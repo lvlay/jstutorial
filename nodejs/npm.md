@@ -15,6 +15,11 @@ modifiedOn: 2014-10-24
 ```bash
 $ npm install npm@latest -g
 ```
+## 安装淘宝提供的国内镜像
+
+```bash
+$ npm install -g cnpm --registry=https://registry.npm.taobao.org
+```
 
 上面的命令中，`@latest`表示最新版本，`-g`表示全局安装。所以，命令的主干是`npm install npm`，也就是使用`npm`安装自己。之所以可以这样，是因为`npm`本身与Node的其他模块没有区别。
 
