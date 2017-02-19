@@ -174,8 +174,7 @@ Node采用V8引擎处理JavaScript脚本，最大特点就是单线程运行，�
 
 由于这种特性，某一个任务的后续操作，往往采用回调函数（callback）的形式进行定义。
 
-{% highlight javascript %}
-
+```javascript
 var isTrue = function(value, callback) {
   if (value === true) {
     callback(null, "Value was true.");
@@ -185,13 +184,13 @@ var isTrue = function(value, callback) {
   }
 }
 
-{% endhighlight %}
+```
 
 上面代码就把进一步的处理，交给回调函数callback。
 
 Node约定，如果某个函数需要回调函数作为参数，则回调函数是最后一个参数。另外，回调函数本身的第一个参数，约定为上一步传入的错误对象。
 
-{% highlight javascript %}
+```javascript
 
 var callback = function (error, value) {
   if (error) {
@@ -200,7 +199,7 @@ var callback = function (error, value) {
   console.log(value);
 }
 
-{% endhighlight %}
+```
 
 上面代码中，callback的第一个参数是Error对象，第二个参数才是真正的数据参数。这是因为回调函数主要用于异步操作，当回调函数运行时，前期的操作早结束了，错误的执行栈早就不存在了，传统的错误捕捉机制try...catch对于异步操作行不通，所以只能把错误交给回调函数处理。
 
@@ -264,32 +263,32 @@ Node.js采用模块化结构，按照[CommonJS规范](http://wiki.commonjs.org/w
 
 require命令用于指定加载模块，加载时可以省略脚本文件的后缀名。
 
-{% highlight javascript %}
+```javascript
 
 var circle = require('./circle.js');
 // 或者
 var circle = require('./circle');
 
-{% endhighlight %}
+```
 
 require方法的参数是模块文件的名字。它分成两种情况，第一种情况是参数中含有文件路径（比如上例），这时路径是相对于当前脚本所在的目录，第二种情况是参数中不含有文件路径，这时Node到模块的安装目录，去寻找已安装的模块（比如下例）。
 
-{% highlight javascript %}
+```javascript
 
 var bar = require('bar');
 
-{% endhighlight %}
+```
 
 有时候，一个模块本身就是一个目录，目录中包含多个文件。这时候，Node在package.json文件中，寻找main属性所指明的模块入口文件。
 
-{% highlight javascript %}
+```javascript
 
 {
   "name" : "bar",
   "main" : "./lib/bar.js"
 }
 
-{% endhighlight %}
+```
 
 上面代码中，模块的启动文件为lib子目录下的bar.js。当使用`require('bar')`命令加载该模块时，实际上加载的是`./node_modules/bar/lib/bar.js`文件。下面写法会起到同样效果。
 
@@ -326,7 +325,7 @@ Node模块采用CommonJS规范。只要符合这个规范，就可以自定义�
 
 下面是一个最简单的模块，假定新建一个foo.js文件，写入以下内容。
 
-{% highlight javascript %}
+```javascript
 
 // foo.js
 
@@ -334,13 +333,13 @@ module.exports = function(x) {
     console.log(x);
 };
 
-{% endhighlight %}
+```
 
 上面代码就是一个模块，它通过module.exports变量，对外输出一个方法。
 
 这个模块的使用方法如下。
 
-{% highlight javascript %}
+```javascript
 
 // index.js
 
@@ -348,20 +347,20 @@ var m = require('./foo');
 
 m("这是自定义模块");
 
-{% endhighlight %}
+```
 
 上面代码通过require命令加载模块文件foo.js（后缀名省略），将模块的对外接口输出到变量m，然后调用m。这时，在命令行下运行index.js，屏幕上就会输出“这是自定义模块”。
 
-{% highlight bash %}
+```javascript
 
 $ node index
 这是自定义模块
 
-{% endhighlight %}
+```
 
 module变量是整个模块文件的顶层变量，它的exports属性就是模块向外输出的接口。如果直接输出一个函数（就像上面的foo.js），那么调用模块就是调用一个函数。但是，模块也可以输出一个对象。下面对foo.js进行改写。
 
-{% highlight javascript %}
+```javascript
 
 // foo.js
 
@@ -375,11 +374,11 @@ out.print = p;
 
 module.exports = out;
 
-{% endhighlight %}
+```
 
 上面的代码表示模块输出out对象，该对象有一个print属性，指向一个函数。下面是这个模块的使用方法。
 
-{% highlight javascript %}
+```javascript
 
 // index.js
 
@@ -387,7 +386,7 @@ var m = require('./foo');
 
 m.print("这是自定义模块");
 
-{% endhighlight %}
+```
 
 上面代码表示，由于具体的方法定义在模块的print属性上，所以必须显式调用print属性。
 
