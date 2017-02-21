@@ -56,8 +56,7 @@ console.log('Server running on port 8080.');
 ```
 
 下面的修改则是根据不同网址的请求，显示不同的内容，已经相当于做出一个网站的雏形了。
-
-{% highlight javascript %}
+```javascript
 
 var http = require("http");
 
@@ -83,7 +82,7 @@ http.createServer(function(req, res) {
 
 }).listen(8080, "localhost");
 
-{% endhighlight %}
+```
 
 回调函数的req（request）对象，拥有以下属性。
 
@@ -94,8 +93,7 @@ http.createServer(function(req, res) {
 ### 处理POST请求
 
 当客户端采用POST方法发送数据时，服务器端可以对data和end两个事件，设立监听函数。
-
-{% highlight javascript %}
+```javascript
 
 var http = require('http');
 
@@ -114,7 +112,7 @@ http.createServer(function (req, res) {
 
 }).listen(8080);
 
-{% endhighlight %}
+```
 
 data事件会在数据接收过程中，每收到一段数据就触发一次，接收到的数据被传入回调函数。end事件则是在所有数据接收完成后触发。
 
@@ -352,12 +350,10 @@ var a = https.createServer(options, function (req, res) {
 ```
 
 上面代码显示，HTTPs服务器与HTTP服务器的最大区别，就是createServer方法多了一个options参数。运行以后，就可以测试是否能够正常访问。
-
-{% highlight bash %}
+```javascript
 
 curl -k https://localhost:8000
-
-{% endhighlight %}
+```
 
 ## 模块属性
 
